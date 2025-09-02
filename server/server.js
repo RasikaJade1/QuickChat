@@ -48,7 +48,6 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
-app.use(cors());
 
 
 //Route setup
