@@ -55,9 +55,6 @@ app.use(cors({
   credentials: true,
 }));
 
-// Explicitly handle preflight
-app.options("*", cors());
-
 
 //Route setup
 app.use("/api/status", (req,res) => res.send("Server is live"));
