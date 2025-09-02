@@ -44,11 +44,19 @@ const allowedOrigins = [
 //Middleware setup
 app.use(express.json({limit: "4mb"}));
 app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 }));
-app.use(cors());
+
+// Explicitly handle preflight
+app.options("*", cors());
 
 
 //Route setup
