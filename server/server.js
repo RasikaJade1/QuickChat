@@ -15,6 +15,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   "http://localhost:5173",
   "https://quickchat-xi.vercel.app",
+  "https://quick-chat-git-main-jaderasika-gmailcoms-projects.vercel.app/login"
 ];
 
 export const io = new Server(server, {
