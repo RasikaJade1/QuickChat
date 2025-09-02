@@ -1,17 +1,17 @@
 import express from "express";
-import {
-  checkAuth,
-  login,
-  signup,
-  updateProfile,
-} from "../controllers/userController.js";
 import { protectRoute } from "../middleware/auth.js";
+import {
+  getMessages,
+  getUsersForSidebar,
+  markMessageAsSeen,
+  sendMessage,
+} from "../controllers/messageController.js";
 
-const userRouter = express.Router();
+const messageRouter = express.Router();
 
-userRouter.post("/signup", signup);
-userRouter.post("/login", login);
-userRouter.put("/update-profile", protectRoute, updateProfile);
-userRouter.get("/check", protectRoute, checkAuth);
+messageRouter.get("/users", protectRoute, getUsersForSidebar);
+messageRouter.get("/:id", protectRoute, getMessages);
+messageRouter.put("/mark/:id", protectRoute, markMessageAsSeen);
+messageRouter.post("/send/:id", protectRoute, sendMessage);
 
-export default userRouter;
+export default messageRouter;
