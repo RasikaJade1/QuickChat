@@ -34,10 +34,20 @@ io.on("connection", (socket)=> {
         delete userSocketMap[userId];
         io.emit("getOnlineUsers", Object.keys(userSocketMap));
     })
-})
+});
+
+const allowedOrigins = [
+  "http://localhost:5173", // local dev
+  "https://quickchat-xi.vercel.app" // frontend prod
+];
 
 //Middleware setup
 app.use(express.json({limit: "4mb"}));
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
 app.use(cors());
 
 
